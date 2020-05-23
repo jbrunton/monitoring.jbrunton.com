@@ -24,3 +24,12 @@ services:
       context: ./ping
     environment:
       - PING_TARGET_HOST
+  nginx:
+    image: "nginx:1.18.0-alpine"
+    container_name: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - $NGINX_CERTS_DIR:/etc/nginx/certs
+      - $NGINX_DIR/default.conf:/etc/nginx/default.conf:ro

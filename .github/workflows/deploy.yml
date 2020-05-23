@@ -39,7 +39,10 @@ jobs:
         with:
           script: |
             export DATA_DIR=/home/deployer/data
+            export NGINX_CERTS_DIR=/home/deployer/certs
+
             cd app
             git pull
+
             docker-compose pull
             docker-compose up --detach --no-build --remove-orphans
