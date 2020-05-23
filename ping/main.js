@@ -13,7 +13,7 @@ if (!host) {
 }
 
 new CronJob(
-	'*/15 * * * * *',
+	'*/10 * * * * *',
 	async function() {
     for (let path of paths) {
       const url = `http://${host}${path}`;

@@ -22,3 +22,5 @@ services:
     image: "jbrunton/monitoring.jbrunton.com-ping:latest"
     build:
       context: ./ping
+    environment:
+      - PING_TARGET_HOST
