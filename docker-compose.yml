@@ -5,6 +5,10 @@ services:
     container_name: prometheus
     ports:
       - 9090:9090
+    command:
+        - --config.file=/etc/prometheus/prometheus.yml
+        - --web.external-url=https://monitoring.jbrunton.com/prometheus/
+        - --web.route-prefix=/prometheus/
     volumes:
       - $PROMETHEUS_DIR:/etc/prometheus
       - $DATA_DIR/prometheus:/prometheus
@@ -16,6 +20,7 @@ services:
     depends_on:
       - prometheus
     volumes:
+      - $GRAFANA_DIR/grafana.ini:/etc/grafana/grafana.ini
       - $GRAFANA_DIR/provisioning:/etc/grafana/provisioning/
       - $DATA_DIR/grafana:/var/lib/grafana
   ping:
@@ -32,4 +37,8 @@ services:
       - 443:443
     volumes:
       - $NGINX_CERTS_DIR:/etc/nginx/certs
-      - $NGINX_DIR/default.conf:/etc/nginx/default.conf:ro
+      - $NGINX_DIR/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - $NGINX_DIR/html:/usr/share/nginx/html:ro
+    depends_on:
+      - grafana
+      - prometheus
