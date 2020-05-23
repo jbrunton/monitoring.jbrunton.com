@@ -47,5 +47,6 @@ jobs:
           KEY: ${{ secrets.DEPLOYER_SSH_KEY }}
         with:
           script: |
+            mkdir -p ping
             docker-compose pull
             docker-compose up --detach --no-build --remove-orphans
