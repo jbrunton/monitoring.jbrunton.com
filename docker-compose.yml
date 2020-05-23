@@ -5,10 +5,9 @@ services:
     container_name: prometheus
     ports:
       - 9090:9090
-    command:
-      - --config.file=/etc/prometheus/prometheus.yml
     volumes:
-      - ${PROMETHEUS_DIR:-/home/deployer/prometheus}:/etc/prometheus
+      - $PROMETHEUS_DIR:/etc/prometheus
+      - $DATA_DIR/prometheus:/prometheus
   grafana:
     image: grafana/grafana:7.0.0
     container_name: grafana
@@ -17,4 +16,6 @@ services:
     depends_on:
       - prometheus
     volumes:
-      - ${GRAFANA_DIR:-/home/deployer/grafana}/provisioning:/etc/grafana/provisioning/
+      - $GRAFANA_DIR/provisioning:/etc/grafana/provisioning/
+      - $DATA_DIR/grafana:/var/lib/grafana
+  
