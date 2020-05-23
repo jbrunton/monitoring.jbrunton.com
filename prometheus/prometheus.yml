@@ -1,0 +1,20 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: bechdel_lists_cadvisor
+    static_configs:
+      - targets: [bechdel-lists.jbrunton.com:8080]
+  - job_name: api
+    static_configs:
+      - targets: [bechdel-lists.jbrunton.com]
+        labels:
+          instance: 'bechdel-lists'
+    metrics_path: /api/metrics
+  - job_name: bechdel_lists_node
+    static_configs:
+      - targets: [bechdel-lists.jbrunton.com:9100]
+    
+rule_files:
+  - /etc/prometheus/rules.yml
+  - /etc/prometheus/alerts.yml

@@ -1,0 +1,9 @@
+groups:
+  - name: Bechdel Lists API Rules
+    rules:
+      - record: api:latency:mean1m
+        expr: rate(http_server_request_duration_seconds_sum{job="api"}[1m]) / rate(http_server_request_duration_seconds_count{job="api"}[1m])
+      - record: api:throughput:mean1m
+        expr: rate(http_server_requests_total{job="api"}[1m])
+      - record: api:errors:mean1m
+        expr: rate(http_server_requests_total{code="500",job="api"}[1m])/rate(http_server_requests_total{job="api"}[1m])
