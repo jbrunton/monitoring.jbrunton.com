@@ -47,3 +47,4 @@ jobs:
             export COMPOSE_FILE=docker-compose.yml
             docker-compose pull
             docker-compose up --detach --no-build --remove-orphans
+            docker-compose restart
