@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 179,
   "graphTooltip": 1,
-  "id": 6,
-  "iteration": 1590090040785,
+  "id": 2,
+  "iteration": 1590346476834,
   "links": [],
   "panels": [
     {
@@ -273,9 +273,11 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(up)",
+          "expr": "sum(up{instance=~\"$instance\"})",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -359,9 +361,11 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "count(rate(container_last_seen{job=\"cadvisor\", name!=\"\"}[5m]))",
+          "expr": "count(rate(container_last_seen{job=\"cadvisor\", name!=\"\", instance=~\"$instance\"}[5m]))",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -448,10 +452,11 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(sum(node_memory_MemTotal_bytes) - sum(node_memory_MemFree_bytes +node_memory_Buffers_bytes + node_memory_Cached_bytes) ) / sum(node_memory_MemTotal_bytes) * 100",
+          "expr": "(sum(node_memory_MemTotal_bytes{instance=~\"$instance\"}) - sum(node_memory_MemFree_bytes{instance=~\"$instance\"} + node_memory_Buffers_bytes{instance=~\"$instance\"} + node_memory_Cached_bytes{instance=~\"$instance\"}) ) / sum(node_memory_MemTotal_bytes{instance=~\"$instance\"}) * 100",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A",
           "step": 10
         }
@@ -540,7 +545,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(sum by (container_name)( rate(container_cpu_usage_seconds_total[1m] ) )) / count(node_cpu_seconds_total{mode=\"system\"}) * 100",
+          "expr": "sum(sum by (container_name)( rate(container_cpu_usage_seconds_total{instance=~\"$instance\"}[1m] ) )) / count(node_cpu_seconds_total{mode=\"system\",instance=~\"$instance\"}) * 100",
           "format": "time_series",
           "interval": "1m",
           "intervalFactor": 1,
@@ -633,9 +638,10 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum (container_fs_limit_bytes - container_fs_usage_bytes) / sum(container_fs_limit_bytes)",
+          "expr": "sum (container_fs_limit_bytes{instance=~\"$instance\"} - container_fs_usage_bytes{instance=~\"$instance\"}) / sum(container_fs_limit_bytes{instance=~\"$instance\"})",
           "interval": "10s",
           "intervalFactor": 1,
+          "legendFormat": "",
           "metric": "",
           "refId": "A",
           "step": 10
@@ -706,7 +712,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_network_receive_bytes_total{id=\"/\"}[$interval])) by (id)",
+          "expr": "sum(rate(container_network_receive_bytes_total{id=\"/\",instance=~\"$instance\"}[$interval])) by (id)",
           "format": "time_series",
           "interval": "2m",
           "intervalFactor": 2,
@@ -714,7 +720,7 @@
           "refId": "A"
         },
         {
-          "expr": "- sum(rate(container_network_transmit_bytes_total{id=\"/\"}[$interval])) by (id)",
+          "expr": "- sum(rate(container_network_transmit_bytes_total{id=\"/\",instance=~\"$instance\"}[$interval])) by (id)",
           "format": "time_series",
           "interval": "2m",
           "intervalFactor": 2,
@@ -814,7 +820,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(node_memory_MemTotal_bytes) - sum(node_memory_MemAvailable_bytes)",
+          "expr": "sum(node_memory_MemTotal_bytes{instance=~\"$instance\"}) - sum(node_memory_MemAvailable_bytes{instance=~\"$instance\"})",
           "format": "time_series",
           "interval": "2m",
           "intervalFactor": 2,
@@ -822,7 +828,7 @@
           "refId": "B"
         },
         {
-          "expr": "sum(node_memory_MemAvailable_bytes)",
+          "expr": "sum(node_memory_MemAvailable_bytes{instance=~\"$instance\"})",
           "format": "time_series",
           "interval": "2m",
           "intervalFactor": 2,
@@ -925,7 +931,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(node_filesystem_free_bytes {job=\"node-exporter\", instance=~\".*9100\", device=~\"/dev/.*\", mountpoint!=\"/var/lib/docker/aufs\"}) ",
+          "expr": "sum(node_filesystem_free_bytes {job=\"node\", instance=~\"$instance\", device=~\"/dev/.*\", mountpoint!=\"/var/lib/docker/aufs\"}) ",
           "format": "time_series",
           "interval": "2m",
           "intervalFactor": 2,
@@ -1047,7 +1053,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "container_cpu_load_average_10s{image!=\"\"}",
+          "expr": "container_cpu_load_average_10s{image!=\"\",instance=~\"$instance\"}",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 1,
@@ -1156,7 +1162,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "container_memory_max_usage_bytes{image!=\"\"}",
+          "expr": "container_memory_max_usage_bytes{image!=\"\",instance=~\"$instance\"}",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 1,
@@ -1326,7 +1332,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sort_desc(sum by (name) (rate(container_network_receive_bytes_total{image!=\"\"}[1m] ) ))",
+          "expr": "sort_desc(sum by (name) (rate(container_network_receive_bytes_total{image!=\"\",instance=~\"$instance\"}[1m] ) ))",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "{{ name }}",
@@ -1434,8 +1440,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sort_desc(sum by (name) (rate(container_network_transmit_bytes_total{image!=\"\"}[1m] ) ))",
+          "expr": "sort_desc(sum by (name) (rate(container_network_transmit_bytes_total{image!=\"\",instance=~\"$instance\"}[1m] ) ))",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{ name }}",
           "metric": "container_network_transmit_bytes_total",
@@ -1547,7 +1554,7 @@
           "refId": "A"
         },
         {
-          "expr": "prometheus_build_info",
+          "expr": "prometheus_build_info{instance=~\"$instance\"}",
           "format": "table",
           "interval": "15m",
           "intervalFactor": 2,
@@ -1555,7 +1562,7 @@
           "refId": "B"
         },
         {
-          "expr": "node_exporter_build_info",
+          "expr": "node_exporter_build_info{instance=~\"$instance\"}",
           "format": "table",
           "interval": "15m",
           "intervalFactor": 2,
@@ -1647,6 +1654,32 @@
         "refresh": 2,
         "skipUrlSync": false,
         "type": "interval"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "bechdel-lists-staging",
+          "value": "bechdel-lists-staging"
+        },
+        "datasource": "Prometheus",
+        "definition": "up",
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "instance",
+        "options": [],
+        "query": "up",
+        "refresh": 1,
+        "regex": "/.*instance=\"([^\"]*).*/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       }
     ]
   },
@@ -1656,7 +1689,6 @@
   },
   "timepicker": {
     "refresh_intervals": [
-      "5s",
       "10s",
       "30s",
       "1m",
@@ -1682,5 +1714,5 @@
   "timezone": "browser",
   "title": "Docker and Host Monitoring",
   "uid": "64nrElFmk",
-  "version": 1
+  "version": 3
 }

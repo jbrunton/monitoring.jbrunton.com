@@ -27,8 +27,6 @@ services:
     image: "jbrunton/monitoring.jbrunton.com-ping:latest"
     build:
       context: ./ping
-    environment:
-      - PING_TARGET_HOST
   nginx:
     image: "nginx:1.18.0-alpine"
     container_name: nginx
