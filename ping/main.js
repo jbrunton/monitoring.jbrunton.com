@@ -4,7 +4,7 @@ const axios = require('axios');
 const hosts = ['staging.bechdel-lists.jbrunton.com', 'bechdel-lists.jbrunton.com'];
 
 new CronJob('*/10 * * * * *', ping, null, true, 'Europe/London');
-new CronJob('*/5 0 * * * *', loadTest, null, true, 'Europe/London');
+new CronJob('*/1 0 * * * *', loadTest, null, true, 'Europe/London');
 
 async function ping() {
   console.log('Starting ping');
@@ -24,7 +24,7 @@ async function loadTest() {
   console.log('Starting load test');
   const iterations = {
     'bechdel-lists.jbrunton.com': 10,
-    'staging.bechdel-lists.jbrunton.com': 5
+    'staging.bechdel-lists.jbrunton.com': 2
   };
   for (let host of hosts) {
     const lists = (await axios.get(`https://${host}/api/lists/browse`)).data;
