@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 5,
-  "iteration": 1590346436784,
+  "iteration": 1590354990313,
   "links": [],
   "panels": [
     {
@@ -62,7 +62,7 @@
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": false,
+      "stack": true,
       "steppedLine": false,
       "targets": [
         {
@@ -406,7 +406,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -451,5 +451,5 @@
   "timezone": "",
   "title": "Apps Dashboard",
   "uid": "nx8Ny4kGk",
-  "version": 2
+  "version": 3
 }
