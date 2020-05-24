@@ -4,7 +4,10 @@ const axios = require('axios');
 const hosts = ['staging.bechdel-lists.jbrunton.com', 'bechdel-lists.jbrunton.com'];
 
 new CronJob('*/10 * * * * *', ping, null, true, 'Europe/London');
-new CronJob('*/1 0 * * * *', loadTest, null, true, 'Europe/London');
+
+if (process.env['LOAD_TEST'] == 1) {
+  new CronJob('*/1 15 * * * *', loadTest, null, true, 'Europe/London');
+}
 
 async function ping() {
   console.log('Starting ping');
