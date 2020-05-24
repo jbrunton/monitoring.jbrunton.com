@@ -1,9 +1,13 @@
 groups:
-  - name: Bechdel Lists API Rules
+  - name: Http Rules
     rules:
-      - record: api:latency:mean1m
-        expr: rate(http_server_request_duration_seconds_sum{job="api"}[1m]) / rate(http_server_request_duration_seconds_count{job="api"}[1m])
-      - record: api:throughput:mean1m
-        expr: rate(http_server_requests_total{job="api"}[1m])
-      - record: api:errors:mean1m
-        expr: rate(http_server_requests_total{code="500",job="api"}[1m])/rate(http_server_requests_total{job="api"}[1m])
+      - record: http:latency:mean1m
+        expr: rate(http_server_request_duration_seconds_sum[1m]) / rate(http_server_request_duration_seconds_count[1m])
+      - record: http:throughput:mean1m
+        expr: rate(http_server_requests_total[1m])
+      - record: http:errors:mean1m
+        expr: rate(http_server_requests_total{code="500"}[1m])/rate(http_server_requests_total[1m])
+  - name: Nginx Rules
+    rules:
+      - record: nginx:throughput:mean1m
+        expr: rate(nginx_http_requests_total[1m])

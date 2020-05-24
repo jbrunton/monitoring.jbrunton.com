@@ -13,6 +13,11 @@ scrape_configs:
         labels:
           instance: 'bechdel-lists'
     metrics_path: /api/metrics
+  - job_name: nginx
+    static_configs:
+      - targets: [bechdel-lists.jbrunton.com:9113]
+        labels:
+          instance: 'bechdel-lists'
   - job_name: bechdel_lists_node
     static_configs:
       - targets: [bechdel-lists.jbrunton.com:9100]
