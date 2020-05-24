@@ -1,0 +1,5 @@
+version: '3'
+services:
+  grafana:
+    volumes:
+      - $GRAFANA_DIR/grafana.development.ini:/etc/grafana/grafana.ini

@@ -65,7 +65,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "api:latency:mean1m",
+          "expr": "http:latency:mean1m",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -159,7 +159,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "api:throughput:mean1m",
+          "expr": "http:throughput:mean1m",
           "hide": false,
           "interval": "",
           "legendFormat": "",
@@ -254,7 +254,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "api:errors:mean1m",
+          "expr": "http:errors:mean1m",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -326,7 +326,7 @@
     ]
   },
   "timezone": "",
-  "title": "Bechdel Lists API Dashboard",
+  "title": "Http Dashboard",
   "uid": "VGyLe3RMk",
   "version": 3
 }

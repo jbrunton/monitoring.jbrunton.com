@@ -1,22 +1,22 @@
 groups:
-  - name: Bechdel Lists API Alerts
+  - name: Bechdel Lists Alerts
     rules:
     - alert: HighRequestLatency
-      expr: api:latency:mean1m{path="/lists/browse"} > 0.01
+      expr: http:latency:mean1m{path="/lists/browse"} > 0.01
       for: 10s
       labels:
         severity: page
       annotations:
         summary: High request latency
     - alert: LowRequestThroughput
-      expr: api:throughput:mean1m{path="/lists/browse"} < 0.06
+      expr: http:throughput:mean1m{path="/lists/browse"} < 0.06
       for: 10s
       labels:
         severity: page
       annotations:
         summary: Low request throughput
     - alert: HighErrorRate
-      expr: api:errors:mean1m > 0
+      expr: http:errors:mean1m > 0
       for: 10s
       labels:
         severity: page
