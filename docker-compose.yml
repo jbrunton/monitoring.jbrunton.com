@@ -28,7 +28,7 @@ services:
     build:
       context: ./ping
     environment:
-      LOAD_TEST=1
+      - LOAD_TEST=1
   nginx:
     image: "nginx:1.18.0-alpine"
     container_name: nginx
