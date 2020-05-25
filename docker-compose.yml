@@ -22,6 +22,7 @@ services:
       - $DATA_DIR/alertmanager:/alertmanager
     command:
       - '--config.file=/etc/alertmanager/config.yml'
+      - --web.external-url=https://monitoring.jbrunton.com/prometheus/
       - '--storage.path=/alertmanager'
     restart: unless-stopped
     expose:
