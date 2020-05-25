@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 5,
-  "iteration": 1590354990313,
+  "id": 4,
+  "iteration": 1590419071932,
   "links": [],
   "panels": [
     {
@@ -69,7 +69,7 @@
           "expr": "http:throughput:mean1m{instance=~\"$instance\"}\n",
           "hide": false,
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{ path }}",
           "refId": "A"
         }
       ],
@@ -163,7 +163,7 @@
         {
           "expr": "http:latency:mean1m{instance=~\"$instance\"}",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{ path }}",
           "refId": "A"
         }
       ],
@@ -257,7 +257,7 @@
         {
           "expr": "nginx:throughput:mean1m{instance=~\"$instance\"}",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "Requests",
           "refId": "A"
         }
       ],
@@ -351,7 +351,7 @@
         {
           "expr": "http:errors:mean1m",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "{{ path }}",
           "refId": "A"
         }
       ],
@@ -407,13 +407,13 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "All",
-          "value": "$__all"
+          "text": "bechdel-lists-production",
+          "value": "bechdel-lists-production"
         },
         "datasource": "Prometheus",
         "definition": "up",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "",
         "multi": false,
         "name": "instance",
@@ -451,5 +451,5 @@
   "timezone": "",
   "title": "Apps Dashboard",
   "uid": "nx8Ny4kGk",
-  "version": 3
+  "version": 2
 }
