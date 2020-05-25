@@ -17,7 +17,7 @@
   "gnetId": 179,
   "graphTooltip": 1,
   "id": 2,
-  "iteration": 1590396669359,
+  "iteration": 1590432204708,
   "links": [],
   "panels": [
     {
@@ -80,7 +80,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "count by (alertstate,alertname,instance) (ALERTS{instance=~\"$instance\"})",
+          "expr": "count by (alertstate,alertname,instance) (ALERTS{instance=~\"$instance\",group=\"node\"})",
           "interval": "",
           "legendFormat": "{{ alertname }} {{ alertstate }}",
           "refId": "A"
@@ -144,13 +144,13 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(ALERTS{instance=~\"$instance\",alertstate=\"pending\"})",
+          "expr": "sum(ALERTS{instance=~\"$instance\",alertstate=\"pending\",group=\"node\"})",
           "interval": "",
           "legendFormat": "pending",
           "refId": "A"
         },
         {
-          "expr": "sum(ALERTS{instance=~\"$instance\",alertstate=\"firing\"})",
+          "expr": "sum(ALERTS{instance=~\"$instance\",alertstate=\"firing\",group=\"node\"})",
           "interval": "",
           "legendFormat": "firing",
           "refId": "B"
@@ -260,7 +260,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "(1 - irate(node_cpu_seconds_total{job=\"node\",mode=\"idle\",instance=~\"$instance\"}[1m])) * 100",
+          "expr": "node:cpu_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -320,7 +320,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "(1 - irate(node_cpu_seconds_total{job=\"node\",mode=\"idle\",instance=~\"$instance\"}[1m])) * 100",
+          "expr": "node:cpu_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -379,7 +379,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "(1 - node_memory_MemAvailable_bytes{instance=~\"$instance\"} / node_memory_MemTotal_bytes{instance=~\"$instance\"}) * 100",
+          "expr": "node:mem_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -439,7 +439,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "(1 - node_memory_MemAvailable_bytes{instance=~\"$instance\"} / node_memory_MemTotal_bytes{instance=~\"$instance\"}) * 100",
+          "expr": "node:mem_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -498,7 +498,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "(1 - node_filesystem_avail_bytes{mountpoint=\"/\",instance=~\"$instance\"} / node_filesystem_size_bytes{mountpoint=\"/\",instance=~\"$instance\"}) * 100",
+          "expr": "node:fs_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -550,7 +550,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "(1 - node_filesystem_avail_bytes{mountpoint=\"/\",instance=~\"$instance\"} / node_filesystem_size_bytes{mountpoint=\"/\",instance=~\"$instance\"}) * 100",
+          "expr": "node:fs_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -734,7 +734,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "(1 - irate(node_cpu_seconds_total{job=\"node\",mode=\"idle\",instance=~\"$instance\"}[1m])) * 100",
+          "expr": "node:cpu_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -794,7 +794,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "(1 - node_memory_MemAvailable_bytes{instance=~\"$instance\"} / node_memory_MemTotal_bytes{instance=~\"$instance\"}) * 100",
+          "expr": "node:mem_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -978,7 +978,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(1 - irate(node_cpu_seconds_total{job=\"node\",mode=\"idle\",instance=~\"$instance\"}[1m])) * 100",
+          "expr": "node:cpu_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "% Used",
           "refId": "A"
@@ -1092,7 +1092,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(1 - node_memory_MemAvailable_bytes{instance=~\"$instance\"} / node_memory_MemTotal_bytes{instance=~\"$instance\"}) * 100",
+          "expr": "node:mem_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "% Available",
           "refId": "A"
@@ -1206,7 +1206,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(1 - node_filesystem_avail_bytes{mountpoint=\"/\",instance=~\"$instance\"} / node_filesystem_size_bytes{mountpoint=\"/\",instance=~\"$instance\"}) * 100",
+          "expr": "node:fs_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "% Used",
           "refId": "A"
@@ -2154,7 +2154,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "bechdel-lists-production",
           "value": "bechdel-lists-production"
         },
@@ -2210,5 +2210,5 @@
   "timezone": "browser",
   "title": "Docker and Host Monitoring",
   "uid": "64nrElFmk",
-  "version": 3
+  "version": 17
 }

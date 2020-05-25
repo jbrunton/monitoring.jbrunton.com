@@ -22,11 +22,11 @@ services:
       - $DATA_DIR/alertmanager:/alertmanager
     command:
       - '--config.file=/etc/alertmanager/config.yml'
-      - --web.external-url=https://monitoring.jbrunton.com/prometheus/
+      - --web.external-url=https://monitoring.jbrunton.com/alertmanager
       - '--storage.path=/alertmanager'
     restart: unless-stopped
-    expose:
-      - 9093
+    ports:
+      - 9093:9093
   grafana:
     image: grafana/grafana:7.0.0
     container_name: grafana
