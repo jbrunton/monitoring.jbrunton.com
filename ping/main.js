@@ -1,7 +1,14 @@
 const CronJob = require('cron').CronJob;
 const axios = require('axios');
 
-const hosts = ['staging.bechdel-lists.jbrunton.com', 'bechdel-lists.jbrunton.com'];
+const environments = {
+  staging: {
+    host: 'staging.bechdel-lists.jbrunton.com'
+  },
+  production: {
+    host: 'bechdel-lists.jbrunton.com'
+  }
+};
 
 new CronJob('*/10 * * * * *', ping, null, true, 'Europe/London');
 
@@ -15,7 +22,8 @@ async function ping() {
     '/',
     '/api/lists/browse',
   ];
-  for (let host of hosts) {
+  for (let [envName, env] of Object.entries(environments)) {
+    const host = env.host;
     for (let path of paths) {
       const url = `https://${host}${path}`;
       loadUrl(url);
@@ -29,7 +37,8 @@ async function loadTest() {
     'bechdel-lists.jbrunton.com': 10,
     'staging.bechdel-lists.jbrunton.com': 2
   };
-  for (let host of hosts) {
+  for (let [envName, env] of Object.entries(environments)) {
+    const host = env.host;
     const lists = (await axios.get(`https://${host}/api/lists/browse`)).data;
     const list = lists.find(list => list.title.includes('Global Top 10 Movies'));
     if (list) {
