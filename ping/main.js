@@ -1,46 +1,56 @@
 const CronJob = require('cron').CronJob;
 const axios = require('axios');
 
-const hosts = ['staging.bechdel-lists.jbrunton.com', 'bechdel-lists.jbrunton.com'];
+const environments = {
+  staging: {
+    host: 'staging.bechdel-lists.jbrunton.com'
+  },
+  production: {
+    host: 'bechdel-lists.jbrunton.com'
+  }
+};
 
-new CronJob('*/10 * * * * *', ping, null, true, 'Europe/London');
-
-if (process.env['LOAD_TEST'] == 1) {
-  new CronJob('*/1 0 * * * *', loadTest, null, true, 'Europe/London');
-}
-
-async function ping() {
-  console.log('Starting ping');
-  const paths = [
-    '/',
-    '/api/lists/browse',
-  ];
-  for (let host of hosts) {
-    for (let path of paths) {
-      const url = `https://${host}${path}`;
-      loadUrl(url);
+const jobs = {
+  ping: {
+    iterations: 1  
+  },
+  load: {
+    description: 'load test',
+    iterations: {
+      staging: 2,
+      production: 10
     }
   }
 }
 
-async function loadTest() {
-  console.log('Starting load test');
-  const iterations = {
-    'bechdel-lists.jbrunton.com': 10,
-    'staging.bechdel-lists.jbrunton.com': 2
-  };
-  for (let host of hosts) {
+new CronJob('*/10 * * * * *', () => runTest('ping'), null, true, 'Europe/London');
+
+if (process.env['LOAD_TEST'] == 1) {
+  new CronJob('*/1 1 * * * *', () => runTest('load'), null, true, 'Europe/London');
+} else {
+  console.log('LOAD_TEST not set, skipping load tests');
+}
+
+async function runTest(jobName) {
+  const config = jobs[jobName];
+  const description = config.description || jobName;
+  console.log(`Starting ${description}`);
+
+  for (let [envName, env] of Object.entries(environments)) {
+    const host = env.host;
     const lists = (await axios.get(`https://${host}/api/lists/browse`)).data;
     const list = lists.find(list => list.title.includes('Global Top 10 Movies'));
     if (list) {
       const paths = [
+        '/',
         '/api/lists/browse',
         `/api/lists/${list.id}`,
         `/api/lists/${list.id}/charts/by_year`,
       ];
       for (let path of paths) {
         const url = `https://${host}${path}`;
-        for (let i = 0; i < iterations[host]; ++i) {
+        const iterations = (typeof config.iterations == 'object') ? config.iterations[envName] : config.iterations;
+        for (let i = 0; i < iterations; ++i) {
           loadUrl(url);
         }
       }
