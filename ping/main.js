@@ -26,7 +26,7 @@ const jobs = {
 new CronJob('*/10 * * * * *', () => runTest('ping'), null, true, 'Europe/London');
 
 if (process.env['LOAD_TEST'] == 1) {
-  new CronJob('*/1 1 * * * *', () => runTest('load'), null, true, 'Europe/London');
+  new CronJob('*/1 * * * * *', () => runTest('load'), null, true, 'Europe/London');
 } else {
   console.log('LOAD_TEST not set, skipping load tests');
 }

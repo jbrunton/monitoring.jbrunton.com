@@ -3,6 +3,6 @@ services:
   grafana:
     volumes:
       - $GRAFANA_DIR/grafana.development.ini:/etc/grafana/grafana.ini
-  ping:
-    environment:
-      - LOAD_TEST=0
+  nginx:
+    ports:
+      - 3001:80
