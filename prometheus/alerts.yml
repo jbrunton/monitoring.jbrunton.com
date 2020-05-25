@@ -3,21 +3,21 @@ groups:
     rules:
     - alert: HighRequestLatency
       expr: http:latency:mean1m{path="/lists/browse"} > 0.01
-      for: 10s
+      for: 20s
       labels:
         severity: page
       annotations:
         summary: High request latency
     - alert: LowRequestThroughput
       expr: http:throughput:mean1m{path="/lists/browse"} < 0.06
-      for: 10s
+      for: 20s
       labels:
         severity: page
       annotations:
         summary: Low request throughput
     - alert: HighErrorRate
       expr: http:errors:mean1m > 0
-      for: 10s
+      for: 20s
       labels:
         severity: page
       annotations:
