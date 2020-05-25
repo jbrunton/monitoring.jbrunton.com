@@ -52,3 +52,4 @@ jobs:
             docker-compose pull
             docker-compose up --detach --no-build --remove-orphans
             docker-compose restart
+          envs: ALERTMANAGER_SLACK_API_URL
