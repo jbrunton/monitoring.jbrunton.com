@@ -1,3 +1,6 @@
+global:
+  slack_api_url: '$ALERTMANAGER_SLACK_API_URL'
+
 route:
   receiver: 'slack'
 
@@ -8,4 +11,3 @@ receivers:
           text: "{{ .CommonAnnotations.description }}"
           username: 'Prometheus'
           channel: '#bechdel-lists'
-          api_url: 'https://hooks.slack.com/services/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'

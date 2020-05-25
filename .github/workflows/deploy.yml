@@ -36,13 +36,17 @@ jobs:
           HOST: monitoring.jbrunton.com
           USERNAME: deployer
           KEY: ${{ secrets.DEPLOYER_SSH_KEY }}
+          ALERTMANAGER_SLACK_API_URL: ${{ secrets.ALERTMANAGER_SLACK_API_URL }}
         with:
           script: |
             export DATA_DIR=/home/deployer/data
             export NGINX_CERTS_DIR=/home/deployer/certs
+            export ALERTMANAGER_SLACK_API_URL
 
             cd app
             git pull
+
+            ./setup.sh
 
             export COMPOSE_FILE=docker-compose.yml
             docker-compose pull

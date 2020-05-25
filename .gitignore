@@ -1,2 +1,3 @@
 /data/
 node_modules/
+/alertmanager/config.yml
