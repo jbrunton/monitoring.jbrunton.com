@@ -6,8 +6,10 @@ groups:
       for: 10s
       labels:
         severity: page
+        group: node
       annotations:
         summary: High CPU usage
+        group: node
     - alert: HighMem
       expr: node:mem_usage:mean1m > 90
       for: 10s
@@ -22,6 +24,7 @@ groups:
       for: 10s
       labels:
         severity: page
+        group: bechdel-lists
       annotations:
         summary: High request latency
     - alert: LowRequestThroughput
@@ -29,6 +32,7 @@ groups:
       for: 10s
       labels:
         severity: page
+        group: bechdel-lists
       annotations:
         summary: Low request throughput
     - alert: HighErrorRate
@@ -36,5 +40,6 @@ groups:
       for: 10s
       labels:
         severity: page
+        group: bechdel-lists
       annotations:
         summary: High error rate
