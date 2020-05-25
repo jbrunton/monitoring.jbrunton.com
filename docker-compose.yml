@@ -12,6 +12,20 @@ services:
     volumes:
       - $PROMETHEUS_DIR:/etc/prometheus
       - $DATA_DIR/prometheus:/prometheus
+    depends_on:
+      - alertmanager
+  alertmanager:
+    image: prom/alertmanager:v0.20.0
+    container_name: alertmanager
+    volumes:
+      - $ALERTMANAGER_DIR:/etc/alertmanager
+      - $DATA_DIR/alertmanager:/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
+    restart: unless-stopped
+    expose:
+      - 9093
   grafana:
     image: grafana/grafana:7.0.0
     container_name: grafana
