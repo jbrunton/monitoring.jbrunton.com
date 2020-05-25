@@ -80,7 +80,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "count by (alertstate,alertname,instance) (ALERTS{instance=~\"$instance\"})",
+          "expr": "count by (alertstate,alertname,instance) (ALERTS{instance=~\"$instance\",group=\"node\"})",
           "interval": "",
           "legendFormat": "{{ alertname }} {{ alertstate }}",
           "refId": "A"
@@ -144,13 +144,13 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(ALERTS{instance=~\"$instance\",alertstate=\"pending\"})",
+          "expr": "sum(ALERTS{instance=~\"$instance\",alertstate=\"pending\",group=\"node\"})",
           "interval": "",
           "legendFormat": "pending",
           "refId": "A"
         },
         {
-          "expr": "sum(ALERTS{instance=~\"$instance\",alertstate=\"firing\"})",
+          "expr": "sum(ALERTS{instance=~\"$instance\",alertstate=\"firing\",group=\"node\"})",
           "interval": "",
           "legendFormat": "firing",
           "refId": "B"

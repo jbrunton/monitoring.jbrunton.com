@@ -15,10 +15,201 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
-  "iteration": 1590419071932,
+  "id": 5,
+  "iteration": 1590433604123,
   "links": [],
   "panels": [
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "id": 16,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "values": false
+        }
+      },
+      "pluginVersion": "7.0.0",
+      "targets": [
+        {
+          "expr": "count by (alertstate,alertname,instance) (ALERTS{instance=~\"$instance\",group=\"app\"})",
+          "interval": "",
+          "legendFormat": "{{ alertname }} {{ alertstate }}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Active Alerts",
+      "type": "stat"
+    },
+    {
+      "aliasColors": {
+        "Active": "orange",
+        "Value": "orange",
+        "firing": "red",
+        "pending": "orange"
+      },
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 6,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 18,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(ALERTS{instance=~\"$instance\",alertstate=\"pending\",group=\"app\"})",
+          "interval": "",
+          "legendFormat": "pending",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(ALERTS{instance=~\"$instance\",alertstate=\"firing\",group=\"app\"})",
+          "interval": "",
+          "legendFormat": "firing",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Alert History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 12,
+      "panels": [],
+      "title": "Alerts",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 10,
+      "panels": [],
+      "title": "Metrics",
+      "type": "row"
+    },
     {
       "aliasColors": {},
       "bars": false,
@@ -37,7 +228,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 0
+        "y": 7
       },
       "hiddenSeries": false,
       "id": 2,
@@ -132,7 +323,7 @@
         "h": 10,
         "w": 12,
         "x": 12,
-        "y": 0
+        "y": 7
       },
       "hiddenSeries": false,
       "id": 6,
@@ -226,7 +417,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 10
+        "y": 17
       },
       "hiddenSeries": false,
       "id": 8,
@@ -320,7 +511,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 10
+        "y": 17
       },
       "hiddenSeries": false,
       "id": 4,
@@ -451,5 +642,5 @@
   "timezone": "",
   "title": "Apps Dashboard",
   "uid": "nx8Ny4kGk",
-  "version": 2
+  "version": 6
 }

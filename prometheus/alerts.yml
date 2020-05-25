@@ -24,7 +24,7 @@ groups:
       for: 10s
       labels:
         severity: page
-        group: bechdel-lists
+        group: app
       annotations:
         summary: High request latency
     - alert: LowRequestThroughput
@@ -32,7 +32,7 @@ groups:
       for: 10s
       labels:
         severity: page
-        group: bechdel-lists
+        group: app
       annotations:
         summary: Low request throughput
     - alert: HighErrorRate
@@ -40,6 +40,6 @@ groups:
       for: 10s
       labels:
         severity: page
-        group: bechdel-lists
+        group: app
       annotations:
         summary: High error rate
