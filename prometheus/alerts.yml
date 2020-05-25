@@ -2,7 +2,7 @@ groups:
   - name: Bechdel Lists Alerts
     rules:
     - alert: HighRequestLatency
-      expr: http:latency:mean1m{path="/lists/browse"} > 0.01
+      expr: http:latency:mean1m{path="/lists/browse"} > 0.02
       for: 20s
       labels:
         severity: page
