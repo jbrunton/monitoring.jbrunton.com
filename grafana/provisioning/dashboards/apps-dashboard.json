@@ -406,7 +406,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "bechdel-lists-production",
           "value": "bechdel-lists-production"
         },

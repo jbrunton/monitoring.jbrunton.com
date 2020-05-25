@@ -1,4 +1,12 @@
 groups:
+  - name: Node Rules
+    rules:
+      - record: node:cpu_usage:mean1m
+        expr: (1 - irate(node_cpu_seconds_total{job="node",mode="idle"}[1m])) * 100
+      - record: node:mem_usage:mean1m
+        expr: (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100
+      - record: node:fs_usage:mean1m
+        expr: (1 - node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100
   - name: Http Rules
     rules:
       - record: http:latency:mean1m
@@ -11,3 +19,4 @@ groups:
     rules:
       - record: nginx:throughput:mean1m
         expr: rate(nginx_http_requests_total[1m])
+ 

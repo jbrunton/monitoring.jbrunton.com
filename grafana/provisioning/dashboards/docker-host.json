@@ -17,7 +17,7 @@
   "gnetId": 179,
   "graphTooltip": 1,
   "id": 2,
-  "iteration": 1590396669359,
+  "iteration": 1590431252995,
   "links": [],
   "panels": [
     {
@@ -260,7 +260,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "(1 - irate(node_cpu_seconds_total{job=\"node\",mode=\"idle\",instance=~\"$instance\"}[1m])) * 100",
+          "expr": "node:cpu_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -320,7 +320,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "(1 - irate(node_cpu_seconds_total{job=\"node\",mode=\"idle\",instance=~\"$instance\"}[1m])) * 100",
+          "expr": "node:cpu_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -379,7 +379,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "(1 - node_memory_MemAvailable_bytes{instance=~\"$instance\"} / node_memory_MemTotal_bytes{instance=~\"$instance\"}) * 100",
+          "expr": "node:mem_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -439,7 +439,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "(1 - node_memory_MemAvailable_bytes{instance=~\"$instance\"} / node_memory_MemTotal_bytes{instance=~\"$instance\"}) * 100",
+          "expr": "node:mem_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -498,7 +498,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "(1 - node_filesystem_avail_bytes{mountpoint=\"/\",instance=~\"$instance\"} / node_filesystem_size_bytes{mountpoint=\"/\",instance=~\"$instance\"}) * 100",
+          "expr": "node:fs_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -550,7 +550,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "(1 - node_filesystem_avail_bytes{mountpoint=\"/\",instance=~\"$instance\"} / node_filesystem_size_bytes{mountpoint=\"/\",instance=~\"$instance\"}) * 100",
+          "expr": "node:fs_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -734,7 +734,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "(1 - irate(node_cpu_seconds_total{job=\"node\",mode=\"idle\",instance=~\"$instance\"}[1m])) * 100",
+          "expr": "node:cpu_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -794,7 +794,7 @@
       "pluginVersion": "7.0.0",
       "targets": [
         {
-          "expr": "(1 - node_memory_MemAvailable_bytes{instance=~\"$instance\"} / node_memory_MemTotal_bytes{instance=~\"$instance\"}) * 100",
+          "expr": "node:mem_usage:mean1m{instance=~\"$instance\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -2210,5 +2210,5 @@
   "timezone": "browser",
   "title": "Docker and Host Monitoring",
   "uid": "64nrElFmk",
-  "version": 3
+  "version": 12
 }

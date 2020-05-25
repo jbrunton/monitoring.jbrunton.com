@@ -1,23 +1,39 @@
 groups:
+  - name: Node Alerts
+    rules:
+    - alert: HighCPU
+      expr: node:cpu_usage:mean1m > 90
+      for: 10s
+      labels:
+        severity: page
+      annotations:
+        summary: High CPU usage
+    - alert: HighMem
+      expr: node:mem_usage:mean1m > 90
+      for: 10s
+      labels:
+        severity: page
+      annotations:
+        summary: High memory usage
   - name: Bechdel Lists Alerts
     rules:
     - alert: HighRequestLatency
       expr: http:latency:mean1m{path="/lists/browse"} > 0.02
-      for: 20s
+      for: 10s
       labels:
         severity: page
       annotations:
         summary: High request latency
     - alert: LowRequestThroughput
       expr: http:throughput:mean1m{path="/lists/browse"} < 0.06
-      for: 20s
+      for: 10s
       labels:
         severity: page
       annotations:
         summary: Low request throughput
     - alert: HighErrorRate
       expr: http:errors:mean1m > 0
-      for: 20s
+      for: 10s
       labels:
         severity: page
       annotations:
