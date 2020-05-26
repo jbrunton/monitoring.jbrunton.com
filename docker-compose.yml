@@ -50,7 +50,8 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - $NGINX_CERTS_DIR:/etc/nginx/certs
+      - $NGINX_CERTS_DIR:/etc/nginx/certs:ro
+      - $NGINX_AUTH_DIR/.htpasswd:/etc/nginx/.htpasswd:ro
       - $NGINX_DIR/upstreams.conf:/etc/nginx/upstreams.conf:ro
       - $NGINX_DIR/services.conf:/etc/nginx/services.conf:ro
       - $NGINX_DIR/default.production.conf:/etc/nginx/conf.d/default.conf:ro
