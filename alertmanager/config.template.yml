@@ -6,10 +6,12 @@ global:
 route:
   receiver: 'opsgenie'
   routes:
-    - receiver: 'opsgenie'
-      continue: true
     - receiver: 'slack'
+      continue: true
       repeat_interval: 5m
+    - receiver: 'opsgenie'
+      match:
+        severity: critical
 
 receivers:
   - name: 'opsgenie'

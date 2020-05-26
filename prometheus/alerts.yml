@@ -1,45 +1,79 @@
 groups:
+  - name: Prometheus Alerts
+    rules:
+      - alert: PrometheusTargetMissing
+        expr: up == 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Prometheus target missing (instance {{ $labels.instance }})"
+          description: "A Prometheus target has disappeared. An exporter might be crashed.\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
   - name: Node Alerts
     rules:
-    - alert: HighCPU
-      expr: node:cpu_usage:mean1m > 90
-      for: 10s
-      labels:
-        severity: page
-        group: node
-      annotations:
-        summary: High CPU usage
-        group: node
-    - alert: HighMem
-      expr: node:mem_usage:mean1m > 90
-      for: 10s
-      labels:
-        severity: page
-      annotations:
-        summary: High memory usage
+      - alert: HighCPUCritical
+        expr: node:cpu_usage:mean1m > 90
+        for: 10s
+        labels:
+          severity: critical
+          group: node
+        annotations:
+          summary: CPU usage critical
+          group: node
+      - alert: HighMemCritical
+        expr: node:mem_usage:mean1m > 90
+        for: 10s
+        labels:
+          severity: critical
+        annotations:
+          summary: Memoro usage critical
+      - alert: HighCPUWarning
+        expr: node:cpu_usage:mean1m > 70
+        for: 10s
+        labels:
+          severity: warning
+          group: node
+        annotations:
+          summary: High CPU usage
+          group: node
+      - alert: HighMemWarning
+        expr: node:mem_usage:mean1m > 70
+        for: 10s
+        labels:
+          severity: warning
+        annotations:
+          summary: High memory usage
   - name: Bechdel Lists Alerts
     rules:
-    - alert: HighRequestLatency
-      expr: http:latency:mean1m{path="/lists/browse"} > 0.02
-      for: 10s
-      labels:
-        severity: page
-        group: app
-      annotations:
-        summary: High request latency
-    - alert: LowRequestThroughput
-      expr: http:throughput:mean1m{path="/lists/browse"} < 0.06
-      for: 10s
-      labels:
-        severity: page
-        group: app
-      annotations:
-        summary: Low request throughput
-    - alert: HighErrorRate
-      expr: http:errors:mean1m > 0
-      for: 10s
-      labels:
-        severity: page
-        group: app
-      annotations:
-        summary: High error rate
+      - alert: CriticalRequestLatency
+        expr: http:latency:mean1m{path="/lists/browse"} > 1
+        for: 10s
+        labels:
+          severity: critical
+          group: app
+        annotations:
+          summary: High request latency
+      - alert: HighRequestLatency
+        expr: http:latency:mean1m{path="/lists/browse"} > 0.02
+        for: 10s
+        labels:
+          severity: warning
+          group: app
+        annotations:
+          summary: High request latency
+      - alert: LowRequestThroughput
+        expr: http:throughput:mean1m{path="/lists/browse"} < 0.06
+        for: 10s
+        labels:
+          severity: warning
+          group: app
+        annotations:
+          summary: Low request throughput
+      - alert: HighErrorRate
+        expr: http:errors:mean1m > 0
+        for: 10s
+        labels:
+          severity: critical
+          group: app
+        annotations:
+          summary: High error rate
