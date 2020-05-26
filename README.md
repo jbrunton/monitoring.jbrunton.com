@@ -2,7 +2,9 @@
 
 Configuration and docker-compose application for monitoring.
 
-Requires a Droplet with docker and docker-compose. 
+## In production
+
+Requires a Droplet with docker and docker-compose.
 
 First time setup:
 
@@ -15,8 +17,7 @@ First time setup:
 Scp SSL certificates to `deployer@monitoring.jbrunton.com:/home/deployer/certs`. Then start the app for the firs time:
 
     cd app
-    export DATA_DIR=/home/deployer/data
-    export NGINX_CERTS_DIR=/home/deployer/certs
+    cp .env.prod .env
     docker-compose up -d
 
 Prometheus, Grafana and Alertmanagers will error due to lack of permissions, so run:
@@ -32,3 +33,21 @@ Configuring basic auth:
     htpasswd -c .htpasswd admin
 
 Note: uses credentials in LastPass for prod. For dev, password is 'admin'.
+
+## Development
+
+Initial setup:
+
+    cp .env.dev .env
+
+Run:
+
+    docker-compose up
+
+This will setup the services at the following URLs:
+
+    http://localhost/prometheus
+    http://localhost/alertmanager
+    http://localhost/grafana
+
+Note: in dev, basic auth credentials for Prometheus and Alertmanager are `admin` / `admin`.
