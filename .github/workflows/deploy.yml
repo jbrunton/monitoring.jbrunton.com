@@ -40,9 +40,6 @@ jobs:
           ALERTMANAGER_OPSGENIE_API_KEY: ${{ secrets.ALERTMANAGER_OPSGENIE_API_KEY }}
         with:
           script: |
-            export DATA_DIR=/home/deployer/data
-            export NGINX_CERTS_DIR=/home/deployer/certs
-            export NGINX_AUTH_DIR=/home/deployer/nginx_auth
             export ALERTMANAGER_SLACK_API_URL
             export ALERTMANAGER_OPSGENIE_API_KEY
 
