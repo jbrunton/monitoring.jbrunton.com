@@ -6,10 +6,9 @@ services:
     ports:
       - 9090:9090
     command:
-        - --config.file=/etc/prometheus/prometheus.yml
-        - --web.external-url=https://monitoring.jbrunton.com/prometheus/
-#        - --web.external-url=http://localhost:3001/prometheus
-        - --web.route-prefix=/prometheus/
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --web.external-url=https://monitoring.jbrunton.com/prometheus/
+      - --web.route-prefix=/prometheus/
     volumes:
       - $PROMETHEUS_DIR:/etc/prometheus
       - $DATA_DIR/prometheus:/prometheus
@@ -22,11 +21,10 @@ services:
       - $ALERTMANAGER_DIR:/etc/alertmanager
       - $DATA_DIR/alertmanager:/alertmanager
     command:
-      - '--config.file=/etc/alertmanager/config.yml'
+      - --config.file=/etc/alertmanager/config.yml
       - --web.external-url=https://monitoring.jbrunton.com/alertmanager/
-#      - --web.external-url=http://localhost:3001/alertmanager
       - --web.route-prefix=/
-      - '--storage.path=/alertmanager'
+      - --storage.path=/alertmanager
     restart: unless-stopped
     ports:
       - 9093:9093
