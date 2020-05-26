@@ -46,9 +46,9 @@ Run:
 
 This will setup the services at the following URLs:
 
-    http://localhost/prometheus
-    http://localhost/alertmanager
-    http://localhost/grafana
+* http://localhost/prometheus
+* http://localhost/alertmanager
+* http://localhost/grafana
 
 Note: in dev, basic auth credentials for Prometheus and Alertmanager are `admin` / `admin`.
 
