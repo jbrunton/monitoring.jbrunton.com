@@ -37,11 +37,13 @@ jobs:
           USERNAME: deployer
           KEY: ${{ secrets.DEPLOYER_SSH_KEY }}
           ALERTMANAGER_SLACK_API_URL: ${{ secrets.ALERTMANAGER_SLACK_API_URL }}
+          ALERTMANAGER_OPSGENIE_API_KEY: ${{ secrets.ALERTMANAGER_OPSGENIE_API_KEY }}
         with:
           script: |
             export DATA_DIR=/home/deployer/data
             export NGINX_CERTS_DIR=/home/deployer/certs
             export ALERTMANAGER_SLACK_API_URL
+            export ALERTMANAGER_OPSGENIE_API_KEY
 
             cd app
             git pull
@@ -52,4 +54,4 @@ jobs:
             docker-compose pull
             docker-compose up --detach --no-build --remove-orphans
             docker-compose restart
-          envs: ALERTMANAGER_SLACK_API_URL
+          envs: ALERTMANAGER_SLACK_API_URL,ALERTMANAGER_OPSGENIE_API_KEY
