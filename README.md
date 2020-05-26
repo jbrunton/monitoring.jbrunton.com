@@ -38,7 +38,7 @@ Note: uses credentials in LastPass for prod. For dev, password is 'admin'.
 
 Initial setup:
 
-    cp .env.dev .env
+    ./setup.sh dev
 
 Run:
 
@@ -52,7 +52,7 @@ This will setup the services at the following URLs:
 
 Note: in dev, basic auth credentials for Prometheus and Alertmanager are `admin` / `admin`.
 
-If you want to test alerting, you will need to add these variables to your local .env file:
+If you want to test end to end alerting, you will need to update the values of the following config secrets in `grafana/config.yml`:
 
-    ALERTMANAGER_SLACK_API_URL=...
-    ALERTMANAGER_OPSGENIE_API_KEY=...
+    slack_api_url: ...
+    opsgenie_api_key: ...
