@@ -14,7 +14,7 @@ First time setup:
     mkdir -p nginx_auth
     git clone https://github.com/jbrunton/monitoring.jbrunton.com.git app
     
-Scp SSL certificates to `deployer@monitoring.jbrunton.com:/home/deployer/certs`. Then start the app for the firs time:
+Scp SSL certificates to `deployer@monitoring.jbrunton.com:/home/deployer/certs`. Then start the app for the first time:
 
     cd app
     cp .env.prod .env
@@ -51,3 +51,8 @@ This will setup the services at the following URLs:
     http://localhost/grafana
 
 Note: in dev, basic auth credentials for Prometheus and Alertmanager are `admin` / `admin`.
+
+If you want to test alerting, you will need to add these variables to your local .env file:
+
+    ALERTMANAGER_SLACK_API_URL=...
+    ALERTMANAGER_OPSGENIE_API_KEY=...
