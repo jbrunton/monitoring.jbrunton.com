@@ -61,8 +61,16 @@ groups:
           group: app
         annotations:
           summary: High request latency
+      - alert: CriticalRequestThroughput
+        expr: http:throughput:mean1m{path="/lists/browse",code="200"} < 0.01
+        for: 10s
+        labels:
+          severity: critical
+          group: app
+        annotations:
+          summary: Low request throughput
       - alert: LowRequestThroughput
-        expr: http:throughput:mean1m{path="/lists/browse"} < 0.06
+        expr: http:throughput:mean1m{path="/lists/browse",code="200"} < 0.06
         for: 10s
         labels:
           severity: warning
