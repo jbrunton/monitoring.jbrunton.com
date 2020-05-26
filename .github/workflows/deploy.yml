@@ -46,10 +46,8 @@ jobs:
             cd app
             git pull
 
-            cp .env.prod .env
-            ./setup.sh
+            ./setup.sh prod
 
-            export COMPOSE_FILE=docker-compose.yml
             docker-compose pull
             docker-compose up --detach --no-build --remove-orphans
             docker-compose restart
