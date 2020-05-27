@@ -2,6 +2,7 @@ resources:
   - k8s/client-node-port.yml
   - k8s/monitoring-grafana.yml
   - k8s/monitoring-prometheus.yml
+  - k8s/monitoring-alertmanager.yml
 configMapGenerator:
   - name: prometheus-configmap
     files:
@@ -19,3 +20,6 @@ configMapGenerator:
       - ./grafana/provisioning/dashboards/dashboards.yml
       - ./grafana/provisioning/dashboards/docker-host.json
       - ./grafana/provisioning/dashboards/apps-dashboard.json
+  - name: alertmanager-configmap
+    files:
+      - ./alertmanager/config.yml
