@@ -54,7 +54,7 @@ groups:
         annotations:
           summary: High request latency
       - alert: HighRequestLatency
-        expr: http:latency:mean1m{path="/lists/browse"} > 0.02
+        expr: http:latency:mean1m{path="/lists/browse"} > 0.5
         for: 10s
         labels:
           severity: warning
