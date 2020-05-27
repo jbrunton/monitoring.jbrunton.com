@@ -2,4 +2,14 @@ configMapGenerator:
   - name: prometheus-configmap
     files:
       - ./prometheus/prometheus.yml
-
+  - name: grafana-configmap
+    files:
+      - ./grafana/grafana.dev.ini
+  - name: grafana-datasources-configmap
+    files:
+      - ./grafana/provisioning/datasources/prometheus.yml
+  - name: grafana-dashboards-configmap
+    files:
+      - ./grafana/provisioning/dashboards/dashboards.yml
+      - ./grafana/provisioning/dashboards/docker-host.json
+      - ./grafana/provisioning/dashboards/apps-dashboard.json
