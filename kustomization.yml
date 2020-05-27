@@ -1,0 +1,5 @@
+configMapGenerator:
+  - name: prometheus-configmap
+    files:
+      - ./prometheus/prometheus.yml
+

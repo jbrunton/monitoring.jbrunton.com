@@ -17,7 +17,16 @@ spec:
           image: prom/prometheus:v2.18.1
           ports:
             - containerPort: 9090
+          volumeMounts:
+            - name: prometheus-volume
+              mountPath: /etc/prometheus/prometheus.yml
+              subPath: prometheus.yml
         - name: grafana
           image: grafana/grafana:7.0.0
           ports:
             - containerPort: 3000
+      volumes:
+        - name: prometheus-volume
+          configMap:
+            name: prometheus-configmap
+          
