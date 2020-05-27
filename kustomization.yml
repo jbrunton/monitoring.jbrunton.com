@@ -6,6 +6,8 @@ configMapGenerator:
   - name: prometheus-configmap
     files:
       - ./prometheus/prometheus.yml
+      - ./prometheus/rules.yml
+      - ./prometheus/alerts.yml
   - name: grafana-configmap
     files:
       - ./grafana/grafana.dev.ini

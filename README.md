@@ -62,7 +62,6 @@ If you want to test end to end alerting, you will need to update the values of t
 To deploy:
 
     kubectl apply -k .
-    kubectl apply -f k8s
 
 Then the following services will be running:
 
