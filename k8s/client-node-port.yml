@@ -5,8 +5,13 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 3050
+    - name: grafana
+      port: 3000
+      targetPort: 3000
+      nodePort: 31000
+    - name: prometheus
+      port: 9090
       targetPort: 9090
-      nodePort: 31515
+      nodePort: 31010
   selector:
     component: monitoring
