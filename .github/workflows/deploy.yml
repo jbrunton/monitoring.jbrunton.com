@@ -40,18 +40,14 @@ jobs:
           ALERTMANAGER_OPSGENIE_API_KEY: ${{ secrets.ALERTMANAGER_OPSGENIE_API_KEY }}
         with:
           script: |
-            export DATA_DIR=/home/deployer/data
-            export NGINX_CERTS_DIR=/home/deployer/certs
-            export NGINX_AUTH_DIR=/home/deployer/nginx_auth
             export ALERTMANAGER_SLACK_API_URL
             export ALERTMANAGER_OPSGENIE_API_KEY
 
             cd app
             git pull
 
-            ./setup.sh
+            ./setup.sh prod
 
-            export COMPOSE_FILE=docker-compose.yml
             docker-compose pull
             docker-compose up --detach --no-build --remove-orphans
             docker-compose restart
