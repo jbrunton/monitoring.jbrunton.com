@@ -1,7 +1,21 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: client-node-port
+  name: prometheus-node-port
+spec:
+  type: NodePort
+  ports:
+    - name: prometheus
+      port: 9090
+      targetPort: 9090
+      nodePort: 31010
+  selector:
+    component: prometheus
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-node-port
 spec:
   type: NodePort
   ports:
@@ -9,9 +23,5 @@ spec:
       port: 3000
       targetPort: 3000
       nodePort: 31000
-    - name: prometheus
-      port: 9090
-      targetPort: 9090
-      nodePort: 31010
   selector:
-    component: monitoring
+    component: grafana
