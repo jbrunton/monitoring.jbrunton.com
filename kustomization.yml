@@ -1,3 +1,7 @@
+resources:
+  - k8s/client-node-port.yml
+  - k8s/monitoring-cluster-ip.yml
+  - k8s/monitoring-deployment.yml
 configMapGenerator:
   - name: prometheus-configmap
     files:
