@@ -59,6 +59,10 @@ If you want to test end to end alerting, you will need to update the values of t
 
 ## Kubernetes
 
+Initial setup:
+
+    minikube addons enable ingress
+
 To deploy:
 
     kubectl apply -k .
@@ -67,3 +71,4 @@ Then the following services will be running:
 
 * Grafana: `open http://$(eval minikube ip):31000`
 * Prometheus: `open http://$(eval minikube ip):31010`
+* Alertmanager: `open http://$(eval minikube ip):31020`

@@ -3,6 +3,7 @@ resources:
   - k8s/monitoring-grafana.yml
   - k8s/monitoring-prometheus.yml
   - k8s/monitoring-alertmanager.yml
+  - k8s/monitoring-ingress.yml
 configMapGenerator:
   - name: prometheus-configmap
     files:
