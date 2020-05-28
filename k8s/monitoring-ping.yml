@@ -1,0 +1,18 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ping-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: ping
+  template:
+    metadata:
+      labels:
+        component: ping
+    spec:
+      containers:
+        - name: ping
+          image: jbrunton/monitoring.jbrunton.com-ping:latest
