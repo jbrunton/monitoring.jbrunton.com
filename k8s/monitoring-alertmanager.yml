@@ -33,6 +33,10 @@ spec:
             - name: alertmanager-config
               mountPath: /etc/alertmanager/config.yml
               subPath: config.yml
+          args:
+            - --config.file=/etc/alertmanager/config.yml
+            - --web.external-url=http://localhost/alertmanager
+            - --web.route-prefix=/
       volumes:
         - name: alertmanager-config
           configMap:

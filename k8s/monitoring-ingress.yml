@@ -9,11 +9,15 @@ spec:
   rules:
     - http:
         paths:
-          - path: /grafana/(.*)
+          - path: /grafana/?(.*)
             backend:
               serviceName: grafana-cluster-ip-service
               servicePort: 3000
-          - path: /(prometheus/.*)
+          - path: /(prometheus/?.*)
             backend:
               serviceName: prometheus-cluster-ip-service
               servicePort: 9090
+          - path: /alertmanager/?(.*)
+            backend:
+              serviceName: alertmanager-cluster-ip-service
+              servicePort: 9093
