@@ -26,17 +26,17 @@ spec:
   selector:
     component: grafana
 ---
-  apiVersion: v1
-  kind: Service
-  metadata:
-    name: alertmanager-node-port
-  spec:
-    type: NodePort
-    ports:
-      - name: alertmanager
-        port: 9093
-        targetPort: 9093
-        nodePort: 31020
-    selector:
-      component: alertmanager
-      
+apiVersion: v1
+kind: Service
+metadata:
+  name: alertmanager-node-port
+spec:
+  type: NodePort
+  ports:
+    - name: alertmanager
+      port: 9093
+      targetPort: 9093
+      nodePort: 31020
+  selector:
+    component: alertmanager
+    
