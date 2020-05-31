@@ -73,6 +73,8 @@ To deploy:
 
 Then the following services will be running:
 
-* Grafana: `open http://$(eval minikube ip):<port>/grafana`
-* Prometheus: `open http://$(eval minikube ip):<port>/prometheus`
-* Alertmanager: `open http://$(eval minikube ip):<port>/alertmanager`
+* Grafana: `open http://$(eval minikube ip):31000/grafana`
+* Prometheus: `open http://$(eval minikube ip):31000/prometheus`
+* Alertmanager: `open http://$(eval minikube ip):31000/alertmanager`
+
+Note: the basic auth credentials for prometheus and alertmanager are `admin` / `admin`.
