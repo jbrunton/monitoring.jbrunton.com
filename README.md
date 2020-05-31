@@ -59,9 +59,13 @@ If you want to test end to end alerting, you will need to update the values of t
 
 ## Kubernetes
 
+### Minikube
+
 Initial setup:
 
-    minikube addons enable ingress
+    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+    helm install nginx-ingress stable/nginx-ingress -f k8s/values.yml
+    kubectl create secret generic basic-auth --from-file=k8s/dev/secrets/auth
 
 To deploy:
 
@@ -69,6 +73,8 @@ To deploy:
 
 Then the following services will be running:
 
-* Grafana: `open http://$(eval minikube ip):31000`
-* Prometheus: `open http://$(eval minikube ip):31010`
-* Alertmanager: `open http://$(eval minikube ip):31020`
+* Grafana: `open http://$(eval minikube ip):31000/grafana`
+* Prometheus: `open http://$(eval minikube ip):31000/prometheus`
+* Alertmanager: `open http://$(eval minikube ip):31000/alertmanager`
+
+Note: the basic auth credentials for prometheus and alertmanager are `admin` / `admin`.

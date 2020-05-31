@@ -1,0 +1,11 @@
+nginx-ingress:
+  controller:
+    # config:
+    #   no-auth-locations: "/prometheus/-/healthy"
+    publishService:
+      enabled: true
+    service:
+      externalTrafficPolicy: Local
+    admissionWebhooks:
+      enabled: false
+      failurePolicy: Ignore
