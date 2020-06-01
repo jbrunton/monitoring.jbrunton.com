@@ -31,13 +31,13 @@ spec:
             - containerPort: 9093
           volumeMounts:
             - name: alertmanager-config
-              mountPath: /etc/alertmanager/config.yml
-              subPath: config.yml
+              mountPath: /etc/alertmanager
+              readOnly: true
           args:
             - --config.file=/etc/alertmanager/config.yml
             - --web.external-url=http://localhost/alertmanager
             - --web.route-prefix=/
       volumes:
         - name: alertmanager-config
-          configMap:
-            name: alertmanager-configmap
+          secret:
+            secretName: alertmanager-config
