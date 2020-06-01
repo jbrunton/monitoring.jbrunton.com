@@ -16,9 +16,9 @@ elif [ "$1" == "clean" ]; then
 else
   echo "Missing or invalid environment."
   echo "Valid usage:"
-  echo "  ./setup dev"
-  echo "  SECRETS_DIR=/path/to/secrets/repo ./setup prod"
-  echo "  ./setup clean"
+  echo "  ./setup-k8s.sh dev"
+  echo "  SECRETS_DIR=/path/to/secrets/repo ./setup-k8s.sh prod"
+  echo "  ./setup-k8s.sh clean"
   exit 1
 fi
 
