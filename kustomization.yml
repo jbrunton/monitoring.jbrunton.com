@@ -25,3 +25,6 @@ secretGenerator:
   - name: alertmanager-config
     files:
       - ./alertmanager/config.yml
+  - name: basic-auth
+    files:
+      - ./k8s/dev/secrets/auth

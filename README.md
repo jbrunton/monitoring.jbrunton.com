@@ -65,10 +65,12 @@ Initial setup:
 
     helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
     helm install nginx-ingress stable/nginx-ingress -f k8s/values.yml
-    kubectl create secret generic basic-auth --from-file=k8s/dev/secrets/auth
 
-To deploy:
+### Dev deployments
 
+To deploy to minikube locally:
+
+    ./setup-k8s.sh dev
     kubectl apply -k .
 
 Then the following services will be running:
@@ -78,3 +80,8 @@ Then the following services will be running:
 * Alertmanager: `open http://$(eval minikube ip):31000/alertmanager`
 
 Note: the basic auth credentials for prometheus and alertmanager are `admin` / `admin`.
+
+To deploy to prod:
+
+    SECRETS_FILE=/path/to/secrets/monitoring.env ./setup-k8s.sh
+    kubectl apply -k
