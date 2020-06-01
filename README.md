@@ -71,7 +71,7 @@ Initial setup:
 To deploy to minikube locally:
 
     ./setup-k8s.sh dev
-    kubectl apply -k .
+    kubectl apply -k k8s/dev
 
 Then the following services will be running:
 
@@ -83,5 +83,5 @@ Note: the basic auth credentials for prometheus and alertmanager are `admin` / `
 
 ### Prod deployments
 
-    SECRETS_FILE=/path/to/secrets/monitoring.env ./setup-k8s.sh
-    kubectl apply -k
+    SECRETS_FILE=/path/to/secrets/monitoring.env ./setup-k8s.sh prod
+    kubectl apply -k k8s/prod
