@@ -21,6 +21,7 @@ configMapGenerator:
       - ./grafana/provisioning/dashboards/dashboards.yml
       - ./grafana/provisioning/dashboards/docker-host.json
       - ./grafana/provisioning/dashboards/apps-dashboard.json
-  - name: alertmanager-configmap
+secretGenerator:
+  - name: alertmanager-config
     files:
       - ./alertmanager/config.yml
