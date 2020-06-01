@@ -1,16 +1,17 @@
 #!/bin/bash
 set -e
 
-if [ "$1" != "dev" ] && [ "$1" != "prod" ]; then
-  echo "Valid usage:"
-  echo "  ./setup dev"
-  echo "  ./setup prod"
-  exit 1
+if [ -z $SECRETS_FILE ]; then
+  if [ "$1" == "dev" ]; then
+    export SECRETS_FILE=./k8s/dev/secrets/monitoring.env
+  else
+    echo "SECRETS_FILE not specified."
+    echo "Valid usage:"
+    echo "  ./setup dev"
+    echo "  SECRETS_FILE=/path/to/secrets.env ./setup"
+    exit 1
+  fi
 fi
 
-if [ "$1" == "dev" ]; then
-  export ALERTMANAGER_SLACK_API_URL=${ALERTMANAGER_SLACK_API_URL:-http://example.com/dummy-hook}
-  export ALERTMANAGER_OPSGENIE_API_KEY=${ALERTMANAGER_OPSGENIE_API_KEY:-DUMMY-KEY}
-fi
-
+export $(grep -v '^#' $SECRETS_FILE | xargs -0)
 envsubst < ./alertmanager/config.template.yml > ./alertmanager/config.yml
