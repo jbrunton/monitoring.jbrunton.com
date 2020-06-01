@@ -1,4 +1,5 @@
 /data/
 node_modules/
-/alertmanager/config.yml
 /.env
+/k8s/base/alertmanager/config.yml
+/k8s/prod/secrets/
