@@ -81,7 +81,7 @@ Then the following services will be running:
 
 Note: the basic auth credentials for prometheus and alertmanager are `admin` / `admin`.
 
-To deploy to prod:
+### Prod deployments
 
     SECRETS_FILE=/path/to/secrets/monitoring.env ./setup-k8s.sh
     kubectl apply -k
