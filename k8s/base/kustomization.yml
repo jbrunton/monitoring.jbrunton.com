@@ -1,18 +1,15 @@
 resources:
-  - k8s/client-node-port.yml
-  - k8s/monitoring-grafana.yml
-  - k8s/monitoring-prometheus.yml
-  - k8s/monitoring-alertmanager.yml
-  - k8s/monitoring-ingress.yml
+  - ./client-node-port.yml
+  - ./monitoring-grafana.yml
+  - ./monitoring-prometheus.yml
+  - ./monitoring-alertmanager.yml
+  - ./monitoring-ingress.yml
 configMapGenerator:
   - name: prometheus-configmap
     files:
       - ./prometheus/prometheus.yml
       - ./prometheus/rules.yml
       - ./prometheus/alerts.yml
-  - name: grafana-configmap
-    files:
-      - ./grafana/grafana.dev.ini
   - name: grafana-datasources-configmap
     files:
       - ./grafana/provisioning/datasources/prometheus.yml
@@ -25,6 +22,3 @@ secretGenerator:
   - name: alertmanager-config
     files:
       - ./alertmanager/config.yml
-  - name: basic-auth
-    files:
-      - ./k8s/dev/secrets/auth

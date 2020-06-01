@@ -2,3 +2,4 @@
 node_modules/
 /alertmanager/config.yml
 /.env
+/k8s/prod/secrets/

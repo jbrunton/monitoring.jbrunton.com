@@ -1,0 +1,25 @@
+global:
+  slack_api_url: 'http://example.com/dummy-hook'
+  opsgenie_api_key: 'DUMMY-KEY'
+  opsgenie_api_url: 'https://api.eu.opsgenie.com/'
+
+route:
+  receiver: 'opsgenie'
+  routes:
+    - receiver: 'slack'
+      continue: true
+      repeat_interval: 5m
+    - receiver: 'opsgenie'
+      match:
+        severity: critical
+
+receivers:
+  - name: 'opsgenie'
+    opsgenie_configs:
+      - send_resolved: true
+  - name: 'slack'
+    slack_configs:
+      - send_resolved: true
+        text: "{{ .CommonAnnotations.description }}"
+        username: 'Prometheus'
+        channel: '#bechdel-lists'

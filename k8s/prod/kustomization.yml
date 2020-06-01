@@ -1,0 +1,10 @@
+bases:
+  - ../base
+secretGenerator:
+  - name: basic-auth
+    files:
+      - ./secrets/auth
+configMapGenerator:
+  - name: grafana-configmap
+    files:
+      - ./grafana/grafana.ini
