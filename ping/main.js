@@ -37,26 +37,35 @@ async function runTest(jobName) {
   console.log(`Starting ${description}`);
 
   for (let [envName, env] of Object.entries(environments)) {
-    const host = env.host;
-    const lists = (await axios.get(`https://${host}/api/lists/browse`)).data;
-    const list = lists.find(list => list.title.includes('Global Top 10 Movies'));
-    if (list) {
-      const paths = [
-        '/',
-        '/api/lists/browse',
-        `/api/lists/${list.id}`,
-        `/api/lists/${list.id}/charts/by_year`,
-      ];
-      for (let path of paths) {
-        const url = `https://${host}${path}`;
-        const iterations = (typeof config.iterations == 'object') ? config.iterations[envName] : config.iterations;
-        for (let i = 0; i < iterations; ++i) {
-          loadUrl(url);
-        }
-      }
-    } else {
-      console.error('Could not find Global Top 10 Movies list, aborting test');
+    try {
+      await testEnvironment(envName, env, config);
+    } catch(e) {
+      console.log(`Error testing environment ${envName}:`);
+      console.log(e);
     }
+  }
+}
+
+async function testEnvironment(envName, env, config) {
+  const host = env.host;
+  const lists = (await axios.get(`https://${host}/api/lists/browse`)).data;
+  const list = lists.find(list => list.title.includes('Global Top 10 Movies'));
+  if (list) {
+    const paths = [
+      '/',
+      '/api/lists/browse',
+      `/api/lists/${list.id}`,
+      `/api/lists/${list.id}/charts/by_year`,
+    ];
+    for (let path of paths) {
+      const url = `https://${host}${path}`;
+      const iterations = (typeof config.iterations == 'object') ? config.iterations[envName] : config.iterations;
+      for (let i = 0; i < iterations; ++i) {
+        loadUrl(url);
+      }
+    }
+  } else {
+    console.error('Could not find Global Top 10 Movies list, aborting test');
   }
 }
 
